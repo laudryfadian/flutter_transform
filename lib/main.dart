@@ -1,5 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter_transform/flip.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,6 +80,16 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyFlip()),
+                );
+              },
+              icon: Icon(CupertinoIcons.clock_fill))
+        ],
       ),
       body: Center(
         child: Column(
