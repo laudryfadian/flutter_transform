@@ -61,14 +61,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Transform(
-      // Transform widget
-      transform: Matrix4.identity()
-        ..setEntry(3, 2, 0.001) // perspective
-        ..rotateX(_offset.dy)
-        ..rotateY(_offset.dx),
-      alignment: FractionalOffset.center,
-      child: _defaultApp(context),
-    );
+        transform: Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateX(0.01 * _offset.dy)
+          ..rotateY(-0.01 * _offset.dx),
+        alignment: FractionalOffset.center,
+        child: GestureDetector(
+          onPanUpdate: (details) => setState(() => _offset += details.delta),
+          onDoubleTap: () => setState(() => _offset = Offset.zero),
+          child: _defaultApp(context),
+        ));
   }
 
   _defaultApp(BuildContext context) {
